@@ -161,12 +161,12 @@ class ManajemenTugas(Tugas):
 
         nodeSekarang = self.head
         while nodeSekarang != None:
-            print(f"No Tugas : {nodeSekarang.noTugas}")
-            print(f"Mata Kuliah : {nodeSekarang.mataKuliah}")
-            print(f"Materi : {nodeSekarang.materi}")
-            print(f"Tenggat Waktu : {nodeSekarang.tenggatWaktu}")
-            print(f"Jenis Tugas : {nodeSekarang.jenisTugas}")
-            print(f"Status Tugas : {nodeSekarang.status}")
+            print(f"No Tugas = {nodeSekarang.noTugas}")
+            print(f"Mata Kuliah = {nodeSekarang.mataKuliah}")
+            print(f"Materi = {nodeSekarang.materi}")
+            print(f"Tenggat Waktu = {nodeSekarang.tenggatWaktu}")
+            print(f"Jenis Tugas = {nodeSekarang.jenisTugas}")
+            print(f"Status Tugas = {nodeSekarang.status}")
             print("="*30)
             nodeSekarang = nodeSekarang.next
 
