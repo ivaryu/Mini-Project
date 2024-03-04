@@ -26,7 +26,7 @@ class ManajemenTugas(Tugas):
             nodeBaru.next = self.head
             self.head = nodeBaru
 
-    def tambahkanTugasDariTengah(self, noTugas, mataKuliah, materi, tenggatWaktu, jenisTugas, status, posisi):
+    def tambahkanTugasDiantara(self, noTugas, mataKuliah, materi, tenggatWaktu, jenisTugas, status, posisi):
         if self.head == None or noTugas == 1:
             self.tambahkanTugasDariAwal(noTugas, mataKuliah, materi, tenggatWaktu, jenisTugas, status)
 
@@ -56,7 +56,7 @@ class ManajemenTugas(Tugas):
             print("="*30)
             print("Tambahkan tugas dari urutan:")
             print("1. Awal")
-            print("2. Tengah")
+            print("2. Posisi Tertentu")
             print("3. Akhir")
             ("="*30)
             opt = int(input("Masukkan operasi menggunakan angka = "))
@@ -76,7 +76,7 @@ class ManajemenTugas(Tugas):
                 jenisTugas = input("Apa Jenis Tugasnya? (Kelompok/Individu/Praktikum) = ")
                 status = "Belum Selesai"
                 posisi = int(input("Ingin dimasukkan ke posisi berapa? = "))
-                self.tambahkanTugasDariTengah(noTugas, mataKuliah, materi, tenggatWaktu, jenisTugas, status, posisi)
+                self.tambahkanTugasDiantara(noTugas, mataKuliah, materi, tenggatWaktu, jenisTugas, status, posisi)
             elif opt==3:
                 noTugas = int(input("Tugas Ke Berapa Ini? = "))
                 mataKuliah = input("Masukkan Mata Kuliah Tugas = ")
@@ -86,6 +86,8 @@ class ManajemenTugas(Tugas):
                 status = "Belum Selesai"
                 ("="*30)
                 self.tambahkanTugasDariBelakang(noTugas, mataKuliah, materi, tenggatWaktu, jenisTugas, status)
+            else:
+                main()
         except ValueError:
             os.system('cls')
             print("Masukkan Angka")
@@ -97,7 +99,7 @@ class ManajemenTugas(Tugas):
 
         self.head = self.head.next
             
-    def hapusTugasDariTengah(self, posisi):
+    def hapusTugasDiantara(self, posisi):
         if self.head == None:
             print("Belum ada tugas")
             return
@@ -130,15 +132,18 @@ class ManajemenTugas(Tugas):
         try:    
             print("Menghapus Daftar Tugas")
             print("1. Hapus Daftar Tugas di Awal")
-            print("2. Hapus Daftar Tugas di Akhir")
+            print("2. Hapus Daftar Tugas di Posisi Tertentu")
+            print("3. Hapus Daftar Tugas di Akhir")
             opt = int(input("Masukkan Operasi Menggunakan Angka = "))
             if opt==1:
                 self.hapusTugasDariAwal()
             elif opt==2:
                 posisi = int(input("Ingin Hapus Tugas No Berapa? = "))
-                self.hapusTugasDariTengah(posisi)
+                self.hapusTugasDiantara(posisi)
             elif opt==3:
                 self.hapusTugasDariBelakang()
+            else:
+                main()
         except ValueError:
             os.system('cls')
             print("Masukkan Angka")
@@ -156,12 +161,12 @@ class ManajemenTugas(Tugas):
 
         nodeSekarang = self.head
         while nodeSekarang != None:
-            print(f"No Tugas: {nodeSekarang.noTugas}")
-            print(f"Mata Kuliah: {nodeSekarang.mataKuliah}")
-            print(f"Materi: {nodeSekarang.materi}")
-            print(f"Tenggat Waktu: {nodeSekarang.tenggatWaktu}")
-            print(f"Jenis Tugas: {nodeSekarang.jenisTugas}")
-            print(f"Status Tugas: {nodeSekarang.status}")
+            print(f"No Tugas : {nodeSekarang.noTugas}")
+            print(f"Mata Kuliah : {nodeSekarang.mataKuliah}")
+            print(f"Materi : {nodeSekarang.materi}")
+            print(f"Tenggat Waktu : {nodeSekarang.tenggatWaktu}")
+            print(f"Jenis Tugas : {nodeSekarang.jenisTugas}")
+            print(f"Status Tugas : {nodeSekarang.status}")
             print("="*30)
             nodeSekarang = nodeSekarang.next
 
