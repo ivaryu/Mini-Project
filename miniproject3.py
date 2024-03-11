@@ -196,8 +196,8 @@ class ManajemenTugas(Tugas):
             return list
 
         pivot = list[0]
-        kiri = [x for x in list[1:] if (x.__getattribute__(key) < pivot.__getattribute__(key)) == ascending]
-        kanan = [x for x in list[1:] if (x.__getattribute__(key) >= pivot.__getattribute__(key)) == ascending]
+        kiri = [x for x in list[1:] if (x.__getattribute__(key) <= pivot.__getattribute__(key)) == ascending]
+        kanan = [x for x in list[1:] if (x.__getattribute__(key) > pivot.__getattribute__(key)) == ascending]
 
         sorted = self.quickSort(kiri, key, ascending) + [pivot] + self.quickSort(kanan, key, ascending)
 
