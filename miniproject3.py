@@ -1,3 +1,4 @@
+
 # Manajemen Tugas
 import os
 os.system('cls')
@@ -18,6 +19,14 @@ class ManajemenTugas(Tugas):
     def __init__(self):
         self.head = None
 
+    def noTugas(self):
+        count = 1
+        nodeSekarang = self.head
+        while nodeSekarang:
+            count += 1
+            nodeSekarang = nodeSekarang.next
+        
+        return count
 
     def tambahkanTugasDariAwal(self, noTugas, mataKuliah, materi, tenggatWaktu, jenisTugas, status):
         if self.head == None:
@@ -47,10 +56,11 @@ class ManajemenTugas(Tugas):
         if self.head == None:
             self.head = Tugas(noTugas, mataKuliah, materi, tenggatWaktu, jenisTugas, status)
             
-        nodeSekarang = self.head
-        while nodeSekarang.next != None:
-            nodeSekarang = nodeSekarang.next
-        nodeSekarang.next = Tugas(noTugas, mataKuliah, materi, tenggatWaktu, jenisTugas, status)
+        else:   
+            nodeSekarang = self.head
+            while nodeSekarang.next:
+                nodeSekarang = nodeSekarang.next
+            nodeSekarang.next = Tugas(noTugas, mataKuliah, materi, tenggatWaktu, jenisTugas, status)
 
     def tambahkanTugas(self):
         try:
@@ -157,19 +167,18 @@ class ManajemenTugas(Tugas):
             print("="*30)
             print("Belum ada tugas")
             return
-
         nodeSekarang = self.head
         while nodeSekarang != None:
+            print("="*30)
             print(f"No Tugas = {nodeSekarang.noTugas}")
             print(f"Mata Kuliah = {nodeSekarang.mataKuliah}")
             print(f"Materi = {nodeSekarang.materi}")
             print(f"Tenggat Waktu = {nodeSekarang.tenggatWaktu}")
             print(f"Jenis Tugas = {nodeSekarang.jenisTugas}")
             print(f"Status Tugas = {nodeSekarang.status}")
-            print("="*30)
             nodeSekarang = nodeSekarang.next
-
-
+        skip = input("\nENTER untuk melanjutkan")
+        
     def perbaruiTugas(self, noTugas, mataKuliah, materi, tenggatWaktu, jenisTugas, status):
         nodeSekarang = self.head
         while nodeSekarang != None:
@@ -181,39 +190,39 @@ class ManajemenTugas(Tugas):
                 nodeSekarang.status = status
                 return True
         return False
+    
+    def lihatSortedTugas(self, tugas):
+            print("="*30)
+            print(f"No Tugas = {tugas.noTugas}")
+            print(f"Mata Kuliah = {tugas.mataKuliah}")
+            print(f"Materi = {tugas.materi}")
+            print(f"Tenggat Waktu = {tugas.tenggatWaktu}")
+            print(f"Jenis Tugas = {tugas.jenisTugas}")
+            print(f"Status Tugas = {tugas.status}")
 
-    def noTugas(self):
-        count = 1
-        nodeSekarang = self.head
-        while nodeSekarang:
-            count += 1
-            nodeSekarang = nodeSekarang.next
+    def quickSort(self, list, key, ascending=True):
+        if len(list) <= 1:
+            return list
+
+        pivot = list[0]
+        kiri = [x for x in list[1:] if (x.__getattribute__(key) < pivot.__getattribute__(key)) == ascending]
+        kanan = [x for x in list[1:] if (x.__getattribute__(key) >= pivot.__getattribute__(key)) == ascending]
+
+        sorted = self.quickSort(kiri, key, ascending) + [pivot] + self.quickSort(kanan, key, ascending)
+
+        return sorted
         
-        return count
-
-
-
-    def tempArray(self):
-        arrayTugas = []
+    def temporaryList(self, key, ascending=True):
+        list = []
         nodeSekarang = self.head
         while nodeSekarang:
-            arrayTugas.append(nodeSekarang)
-            nodeSekarang.nodeSekarang.next
+            list.append(nodeSekarang)
+            nodeSekarang = nodeSekarang.next
 
-        #Update Linked List setelah tersortir
-        ManajemenTugas.head = None
-        for data in arrayTugas:
-            ManajemenTugas.tambahkanTugasDariBelakang(data)
-
-
-    def quickSort(self):
-        if self.head == None:
-            print("Tidak ada tugas untuk di sortir")
-
-        nodeSekarang = self.head
-        pivot = nodeSekarang.noTugas
-                
-            
+        sorted = self.quickSort(list, key, ascending)
+        for tugas in sorted:
+            self.lihatSortedTugas(tugas)
+        skip = input("\nENTER untuk melanjutkan")
         
 
     def quickSortMenu(self):
@@ -226,15 +235,19 @@ class ManajemenTugas(Tugas):
             print("4. Mata Kuliah (Descending)")
             opt = int(input("Masukkan Operasi dengan Angka = "))    
             if opt==1:
-                self.quickSort()
-            else:
-                print("ta")
+                self.temporaryList("noTugas")
+            elif opt==2:
+                self.temporaryList("noTugas", False)
+            elif opt==3:
+                self.temporaryList("mataKuliah")
+            elif opt==4:
+                self.temporaryList("mataKuliah", False)
         except ValueError:
             print("Masukkan Angka")
 
 
-
 def main():
+        os.system("cls")
         print("Selamat Datang!")
         print("Di Program Notion, Manajemen Tugas Kuliah")
 
@@ -252,6 +265,7 @@ def main():
                 print("6. Keluar Program")
                 print("="*30)
                 operator = int(input("Pilih Menu Menggunakan Angka = "))
+                os.system("cls")
                 if operator==1:
                     tugasKu.tambahkanTugas()
                 elif operator==2:
