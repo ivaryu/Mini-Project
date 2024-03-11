@@ -191,15 +191,6 @@ class ManajemenTugas(Tugas):
                 return True
         return False
     
-    def lihatSortedTugas(self, tugas):
-            print("="*30)
-            print(f"No Tugas = {tugas.noTugas}")
-            print(f"Mata Kuliah = {tugas.mataKuliah}")
-            print(f"Materi = {tugas.materi}")
-            print(f"Tenggat Waktu = {tugas.tenggatWaktu}")
-            print(f"Jenis Tugas = {tugas.jenisTugas}")
-            print(f"Status Tugas = {tugas.status}")
-
     def quickSort(self, list, key, ascending=True):
         if len(list) <= 1:
             return list
@@ -223,6 +214,15 @@ class ManajemenTugas(Tugas):
         for tugas in sorted:
             self.lihatSortedTugas(tugas)
         skip = input("\nENTER untuk melanjutkan")
+        
+    def lihatSortedTugas(self, tugas):
+            print("="*30)
+            print(f"No Tugas = {tugas.noTugas}")
+            print(f"Mata Kuliah = {tugas.mataKuliah}")
+            print(f"Materi = {tugas.materi}")
+            print(f"Tenggat Waktu = {tugas.tenggatWaktu}")
+            print(f"Jenis Tugas = {tugas.jenisTugas}")
+            print(f"Status Tugas = {tugas.status}")
         
 
     def quickSortMenu(self):
