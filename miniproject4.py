@@ -252,51 +252,27 @@ class ManajemenTugas(Tugas):
                 self.temporaryList("mataKuliah", False)
         except ValueError:
             print("Masukkan Angka")
-
-# Algoritma
-# 1. Memilih secara no tugas atau mata kuliah
-# 2. Gunakan key seperti quick sort
-# 3. Gunakan getattribute
-
-    def jumpSearchdds(self, jumpList, key, cari):
-        if len(jumpList) < 0:
-            return f"Tidak ada tugas"
-        
+ 
+    def jumpSearch(self, jumpList, key, cari):
         panjangData = len(jumpList)
         jumpStep = int(panjangData ** 0.5)
         currentIndex = 0
 
-        while jumpList[currentIndex] < cari:
-            if currentIndex + jumpStep.__getattribute__(key) > cari:
-                currentIndex = len(jumpList) - 1
-            else:
-                currentIndex += jumpStep
+        while jumpList[currentIndex].__getattribute__(key) < cari:
+            currentIndex = jumpStep
+            jumpStep += int(panjangData ** 0.5)
+            if currentIndex >= panjangData:
+                return "Tidak ketemu", -1
 
-        for i in range(currentIndex, currentIndex - jumpStep, -1):
-            if cari == currentIndex:
-                return f"Ketemu"
-            return f"Tidak ketemu"
-    
-    def jumpSearch(self, jumpList, key, cari):
-        n = len(jumpList)
-        jumpStep = int(n ** 0.5)
-        prev = 0
+        while jumpList[currentIndex].__getattribute__(key) < cari:
+            currentIndex += 1
+            if currentIndex == min(jumpStep, panjangData):
+                return "Tidak ketemu", -1
 
-        while jumpList.__getattribute__(key)[min(jumpStep, n - 1)]< cari:
-            prev = jumpStep
-            jumpStep += int(n ** 0.5)
-            if prev >= n:
-                return "Tidak ketemu"
+        if jumpList[currentIndex].__getattribute__(key) == cari:
+            return currentIndex
 
-        while jumpList[prev][key] < cari:
-            prev += 1
-            if prev == min(jumpStep, n):
-                return "Tidak ketemu"
-
-        if jumpList[prev][key] == cari:
-            return f"Ketemu"
-
-        return f"Tidak ketemu"
+        return "Tidak ketemu", -1
 
 
     def jsearchList(self, key, cari):
@@ -307,8 +283,16 @@ class ManajemenTugas(Tugas):
             nodeSekarang = nodeSekarang.next
 
         mencari = self.jumpSearch(jumpList, key, cari)
-        print({mencari})
-
+        tugas = jumpList[mencari]
+        print("="*60)
+        print(f"No Tugas = {tugas.noTugas}")
+        print(f"Mata Kuliah = {tugas.mataKuliah}")
+        print(f"Materi = {tugas.materi}")
+        print(f"Tenggat Waktu = {tugas.tenggatWaktu}")
+        print(f"Jenis Tugas = {tugas.jenisTugas}")
+        print(f"Status Tugas = {tugas.status}")
+        print("="*60)
+        skip = input("\nENTER untuk melanjutkan")
 
 tugasKu = ManajemenTugas()
 
@@ -328,9 +312,8 @@ def menuSearch():
         lenTugas = tugasKu.noTugas()
         print(f"Terdapat {lenTugas} Daftar Tugas saat ini.")
         print("="*30)
-        mk = str(input("Masukkan Mata Kuliah yang ingin Di Cari")).strip().lower()
-        if mk == "":
-            tugasKu.jsearchList("mataKuliah", mk)
+        mk = str(input("Masukkan Mata Kuliah yang ingin Di Cari = " )).strip()
+        tugasKu.jsearchList("mataKuliah", mk)
 
 def main():
         os.system("cls")
@@ -381,14 +364,7 @@ def main():
                     ask = str(input("Ingin Melakukan Pengurutan Data? (y/n) = ")).strip().lower()
                     print("="*60)
                     if ask == "y":  
-                        print("Opsi Pengurutan Daftar Tugas:")
-                        print("1. No Tugas")
-                        print("2. Mata Kuliah")
-                        opts = int(input("Pilih Operasi Menggunakan Angka ="))
-                        if opts == 1:
-                            tugasKu.temporaryList("noTugas")
-                        elif opts == 2:
-                            tugasKu.temporaryList("mataKuliah")
+                        tugasKu.temporaryList("noTugas")
                     elif ask == "n":
                         menuSearch()
                     else:
