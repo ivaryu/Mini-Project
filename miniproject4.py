@@ -283,17 +283,35 @@ class ManajemenTugas(Tugas):
             nodeSekarang = nodeSekarang.next
 
         mencari = self.jumpSearch(jumpList, key, cari)
-        tugas = jumpList[mencari]
-        print("="*60)
-        print(f"No Tugas = {tugas.noTugas}")
-        print(f"Mata Kuliah = {tugas.mataKuliah}")
-        print(f"Materi = {tugas.materi}")
-        print(f"Tenggat Waktu = {tugas.tenggatWaktu}")
-        print(f"Jenis Tugas = {tugas.jenisTugas}")
-        print(f"Status Tugas = {tugas.status}")
-        print("="*60)
+        hasil = []
+        if mencari != -1 :
+            hasil.append(mencari)
+
+        for index, tugas in enumerate(jumpList):
+            if key == "mataKuliah" and tugas.mataKuliah == cari and index != mencari:
+                hasil.append(index)
+
+        for index in hasil:
+            datas = jumpList[index]
+            print("="*60)
+            print(f"No Tugas = {datas.noTugas}")
+            print(f"Mata Kuliah = {datas.mataKuliah}")
+            print(f"Materi = {datas.materi}")
+            print(f"Tenggat Waktu = {datas.tenggatWaktu}")
+            print(f"Jenis Tugas = {datas.jenisTugas}")
+            print(f"Status Tugas = {datas.status}")
+            print("="*60)
         skip = input("\nENTER untuk melanjutkan")
 
+    def panjangNode(self):
+        count = 1
+        nodeSekarang = self.head
+        while nodeSekarang:
+            count += 1
+            nodeSekarang = nodeSekarang.next
+        
+        return count
+    
 tugasKu = ManajemenTugas()
 
 def menuSearch():
@@ -303,7 +321,7 @@ def menuSearch():
     print("2. Mata Kuliah")
     opt = int(input("Masukkan Operasi dengan Angka = "))
     if opt == 1:
-        lenTugas = tugasKu.noTugas()
+        lenTugas = tugasKu.panjangNode()
         print(f"Terdapat {lenTugas} Daftar Tugas saat ini. ")
         no = int(input("Masukkan Angka No Tugas yang Ingin Dicari = "))   
         tugasKu.jsearchList("noTugas", no)
@@ -360,16 +378,9 @@ def main():
                 elif operator == 6:
                     os.system("cls")
                     print("="*60)
-                    print("Melakukan Pencarian Dibutuhkan Daftar Tugas yang Terurut.")
-                    ask = str(input("Ingin Melakukan Pengurutan Data? (y/n) = ")).strip().lower()
-                    print("="*60)
-                    if ask == "y":  
-                        tugasKu.temporaryList("noTugas")
-                    elif ask == "n":
-                        menuSearch()
-                    else:
-                        print("Terjadi Kesalahan.")
-                        skip = input("\nENTER untuk melanjutkan")
+                    tugasKu.temporaryList("noTugas")
+                    print("Data berhasil Terurutkan Secara Otomatis")
+                    menuSearch()
                 else:
                     print("Anda Keluar Dari Program.")
                     break
