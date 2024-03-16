@@ -1,6 +1,8 @@
 
 # Manajemen Tugas
+import datetime
 import os
+
 os.system('cls')
 
 
@@ -68,25 +70,28 @@ class ManajemenTugas(Tugas):
                 noTugas = self.noTugas()
                 mataKuliah = input("Masukkan Mata Kuliah Tugas = ").strip().upper() 
                 materi = input("Materi dari Tugas tersebut = ").capitalize()
-                tenggatWaktu = input("Tenggat Waktu Tugas = ")
-                jenisTugas = input("Apa Jenis Tugasnya? (Kelompok/Individu/Praktikum) = ")
+                tenggatWaktu = input("Tenggat Waktu Tugas (DD/MM/YYYY HH:MM) = ")
+                tenggatWaktu = datetime.datetime.strptime(tenggatWaktu, "%d/%m/%Y %H:%M")
+                jenisTugas = input("Apa Jenis Tugasnya? (Kelompok/Individu/Praktikum) = ").capitalize()
                 status = "Belum Selesai"
                 self.tambahkanTugasDariAwal(noTugas, mataKuliah, materi, tenggatWaktu, jenisTugas, status)
             elif opt==2:
                 noTugas = self.noTugas()
-                mataKuliah = input("Masukkan Mata Kuliah Tugas = ").upper() 
-                materi = input("Materi dari Tugas Tersebut = ")
-                tenggatWaktu = input("Tenggat Waktu Tugas = ")
-                jenisTugas = input("Apa Jenis Tugasnya? (Kelompok/Individu/Praktikum) = ")
+                mataKuliah = input("Masukkan Mata Kuliah Tugas = ").strip().upper() 
+                materi = input("Materi dari Tugas tersebut = ").capitalize()
+                tenggatWaktu = input("Tenggat Waktu Tugas (DD/MM/YYYY HH:MM) = ")
+                tenggatWaktu = datetime.datetime.strptime(tenggatWaktu, "%d/%m/%Y %H:%M")
+                jenisTugas = input("Apa Jenis Tugasnya? (Kelompok/Individu/Praktikum) = ").capitalize()
                 status = "Belum Selesai"
                 posisi = int(input("Ingin dimasukkan ke posisi berapa? = "))
                 self.tambahkanTugasDiantara(noTugas, mataKuliah, materi, tenggatWaktu, jenisTugas, status, posisi)
             elif opt==3:
                 noTugas = self.noTugas()
-                mataKuliah = input("Masukkan Mata Kuliah Tugas = ").upper() 
-                materi = input("Materi dari Tugas tersebut = ")
-                tenggatWaktu = input("Tenggat Waktu Tugas = ")
-                jenisTugas = input("Apa Jenis Tugasnya? (Kelompok/Individu/Praktikum) = ")
+                mataKuliah = input("Masukkan Mata Kuliah Tugas = ").strip().upper() 
+                materi = input("Materi dari Tugas tersebut = ").capitalize()
+                tenggatWaktu = input("Tenggat Waktu Tugas (DD/MM/YYYY HH:MM) = ")
+                tenggatWaktu = datetime.datetime.strptime(tenggatWaktu, "%d/%m/%Y %H:%M")
+                jenisTugas = input("Apa Jenis Tugasnya? (Kelompok/Individu/Praktikum) = ").capitalize()
                 status = "Belum Selesai"
                 ("="*30)
                 self.tambahkanTugasDariBelakang(noTugas, mataKuliah, materi, tenggatWaktu, jenisTugas, status)
@@ -232,27 +237,6 @@ class ManajemenTugas(Tugas):
             print(f"Status Tugas = {tugas.status}")
         skip = input("\nENTER untuk melanjutkan")
         
-
-    def quickSortMenu(self):
-        try:
-            print("Mengurutkan Tugas")
-            print("Urutkan Tugas dengan:")
-            print("1. No Tugas (Ascending)")
-            print("2. No Tugas (Descending)")
-            print("3. Mata Kuliah (Ascending)")
-            print("4. Mata Kuliah (Descending)")
-            opt = int(input("Masukkan Operasi dengan Angka = "))    
-            if opt==1:
-                self.temporaryList("noTugas")
-            elif opt==2:
-                self.temporaryList("noTugas", False)
-            elif opt==3:
-                self.temporaryList("mataKuliah")
-            elif opt==4:
-                self.temporaryList("mataKuliah", False)
-        except ValueError:
-            print("Masukkan Angka")
- 
     def jumpSearch(self, jumpList, key, cari):
         panjangData = len(jumpList)
         jumpStep = int(panjangData ** 0.5)
@@ -273,7 +257,6 @@ class ManajemenTugas(Tugas):
             return currentIndex
 
         return "Tidak ketemu", -1
-
 
     def jsearchList(self, key, cari):
         jumpList = []
@@ -313,6 +296,29 @@ class ManajemenTugas(Tugas):
         return count
     
 tugasKu = ManajemenTugas()
+
+def quickSortMenu():
+    try:
+        print("Mengurutkan Tugas")
+        print("Urutkan Tugas dengan:")
+        print("1. No Tugas (Ascending)")
+        print("2. No Tugas (Descending)")
+        print("3. Mata Kuliah (Ascending)")
+        print("4. Mata Kuliah (Descending)")
+        opt = int(input("Masukkan Operasi dengan Angka = "))    
+        if opt==1:
+            tugasKu.temporaryList("noTugas")
+        elif opt==2:
+            tugasKu.temporaryList("noTugas", False)
+        elif opt==3:
+            tugasKu.temporaryList("mataKuliah")
+        elif opt==4:
+            tugasKu.temporaryList("mataKuliah", False)
+    except ValueError:
+        print("Masukkan Angka")
+    except IndexError:
+        print("="*30)
+        print("Belum ada Tugas")
 
 def menuSearch():
     print("="*30)
@@ -368,19 +374,23 @@ def main():
                     print("Memperbarui Tugas")
                     noTugas = int(input("Masukkan Nomor Tugas yang Ingin Diperbarui = "))
                     mataKuliah = input("Masukkan Mata Kuliah Tugas = ").strip().upper() 
-                    materi = input("Materi dari Tugas tersebut = ")
-                    tenggatWaktu = input("Tenggat Waktu Tugas = ")
-                    jenisTugas = input("Apa Jenis Tugasnya? (Kelompok/Individu/Praktikum) = ")
+                    materi = input("Materi dari Tugas tersebut = ").capitalize()
+                    tenggatWaktu = input("Tenggat Waktu Tugas (DD/MM/YYYY HH:MM) = ")
+                    tenggatWaktu = datetime.datetime.strptime(tenggatWaktu, "%d/%m/%Y %H:%M")
+                    jenisTugas = input("Apa Jenis Tugasnya? (Kelompok/Individu/Praktikum) = ").capitalize()
                     status = "Belum Selesai"
-                    ("="*30)
+                    print("="*30)
                     tugasKu.perbaruiTugas(noTugas, mataKuliah, materi, tenggatWaktu, jenisTugas, status)
                 elif operator == 5:
-                    tugasKu.quickSortMenu()
+                    quickSortMenu()
                 elif operator == 6:
-                    os.system("cls")
-                    tugasKu.temporaryList("noTugas")
-                    print("\nData Diurutkan Secara Otomatis")
-                    menuSearch()
+                    try:
+                        os.system("cls")
+                        tugasKu.temporaryList("noTugas")
+                        print("\nData Diurutkan Secara Otomatis")
+                        menuSearch()
+                    except IndexError:
+                        print("Belum Ada Tugas")
                 else:
                     print("Anda Keluar Dari Program.")
                     break
