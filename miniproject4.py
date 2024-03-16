@@ -66,7 +66,7 @@ class ManajemenTugas(Tugas):
             opt = int(input("Masukkan operasi menggunakan angka = "))
             if opt==1:
                 noTugas = self.noTugas()
-                mataKuliah = input("Masukkan Mata Kuliah Tugas = ")
+                mataKuliah = input("Masukkan Mata Kuliah Tugas = ").upper() 
                 materi = input("Materi dari Tugas tersebut = ")
                 tenggatWaktu = input("Tenggat Waktu Tugas = ")
                 jenisTugas = input("Apa Jenis Tugasnya? (Kelompok/Individu/Praktikum) = ")
@@ -74,7 +74,7 @@ class ManajemenTugas(Tugas):
                 self.tambahkanTugasDariAwal(noTugas, mataKuliah, materi, tenggatWaktu, jenisTugas, status)
             elif opt==2:
                 noTugas = self.noTugas()
-                mataKuliah = input("Masukkan Mata Kuliah Tugas = ")
+                mataKuliah = input("Masukkan Mata Kuliah Tugas = ").upper() 
                 materi = input("Materi dari Tugas Tersebut = ")
                 tenggatWaktu = input("Tenggat Waktu Tugas = ")
                 jenisTugas = input("Apa Jenis Tugasnya? (Kelompok/Individu/Praktikum) = ")
@@ -83,7 +83,7 @@ class ManajemenTugas(Tugas):
                 self.tambahkanTugasDiantara(noTugas, mataKuliah, materi, tenggatWaktu, jenisTugas, status, posisi)
             elif opt==3:
                 noTugas = self.noTugas()
-                mataKuliah = input("Masukkan Mata Kuliah Tugas = ")
+                mataKuliah = input("Masukkan Mata Kuliah Tugas = ").upper() 
                 materi = input("Materi dari Tugas tersebut = ")
                 tenggatWaktu = input("Tenggat Waktu Tugas = ")
                 jenisTugas = input("Apa Jenis Tugasnya? (Kelompok/Individu/Praktikum) = ")
@@ -330,7 +330,7 @@ def menuSearch():
         lenTugas = tugasKu.noTugas()
         print(f"Terdapat {lenTugas} Daftar Tugas saat ini.")
         print("="*30)
-        mk = str(input("Masukkan Mata Kuliah yang ingin Di Cari = " )).strip()
+        mk = str(input("Masukkan Mata Kuliah yang ingin Di Cari = " )).strip().upper() 
         tugasKu.jsearchList("mataKuliah", mk)
 
 def main():
@@ -366,7 +366,7 @@ def main():
                     tugasKu.lihatTugas()
                     print("Memperbarui Tugas")
                     noTugas = int(input("Masukkan Nomor Tugas yang Ingin Diperbarui = "))
-                    mataKuliah = input("Masukkan Mata Kuliah Tugas = ")
+                    mataKuliah = input("Masukkan Mata Kuliah Tugas = ").upper() 
                     materi = input("Materi dari Tugas tersebut = ")
                     tenggatWaktu = input("Tenggat Waktu Tugas = ")
                     jenisTugas = input("Apa Jenis Tugasnya? (Kelompok/Individu/Praktikum) = ")
