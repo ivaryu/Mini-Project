@@ -304,7 +304,7 @@ class ManajemenTugas(Tugas):
         skip = input("\nENTER untuk melanjutkan")
 
     def panjangNode(self):
-        count = 1
+        count = 0
         nodeSekarang = self.head
         while nodeSekarang:
             count += 1
@@ -377,9 +377,8 @@ def main():
                     tugasKu.quickSortMenu()
                 elif operator == 6:
                     os.system("cls")
-                    print("="*60)
                     tugasKu.temporaryList("noTugas")
-                    print("Data berhasil Terurutkan Secara Otomatis")
+                    os.system("cls")
                     menuSearch()
                 else:
                     print("Anda Keluar Dari Program.")
