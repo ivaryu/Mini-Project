@@ -66,8 +66,8 @@ class ManajemenTugas(Tugas):
             opt = int(input("Masukkan operasi menggunakan angka = "))
             if opt==1:
                 noTugas = self.noTugas()
-                mataKuliah = input("Masukkan Mata Kuliah Tugas = ").upper() 
-                materi = input("Materi dari Tugas tersebut = ")
+                mataKuliah = input("Masukkan Mata Kuliah Tugas = ").strip().upper() 
+                materi = input("Materi dari Tugas tersebut = ").capitalize()
                 tenggatWaktu = input("Tenggat Waktu Tugas = ")
                 jenisTugas = input("Apa Jenis Tugasnya? (Kelompok/Individu/Praktikum) = ")
                 status = "Belum Selesai"
@@ -315,6 +315,7 @@ class ManajemenTugas(Tugas):
 tugasKu = ManajemenTugas()
 
 def menuSearch():
+    print("="*30)
     print("Mencari Tugas pada Daftar Tugas")
     print("Anda Dapat Mencari Tugas Berdasarkan:")
     print("1. No Tugas")
@@ -322,7 +323,7 @@ def menuSearch():
     opt = int(input("Masukkan Operasi dengan Angka = "))
     if opt == 1:
         lenTugas = tugasKu.panjangNode()
-        print(f"Terdapat {lenTugas} Daftar Tugas saat ini. ")
+        print(f"Terdapat {lenTugas} Tugas pada Daftar Tugas saat ini. ")
         no = int(input("Masukkan Angka No Tugas yang Ingin Dicari = "))   
         tugasKu.jsearchList("noTugas", no)
         print("Masukkan Angka Jika Mencari Berdasarkan No Tugas.")
@@ -366,7 +367,7 @@ def main():
                     tugasKu.lihatTugas()
                     print("Memperbarui Tugas")
                     noTugas = int(input("Masukkan Nomor Tugas yang Ingin Diperbarui = "))
-                    mataKuliah = input("Masukkan Mata Kuliah Tugas = ").upper() 
+                    mataKuliah = input("Masukkan Mata Kuliah Tugas = ").strip().upper() 
                     materi = input("Materi dari Tugas tersebut = ")
                     tenggatWaktu = input("Tenggat Waktu Tugas = ")
                     jenisTugas = input("Apa Jenis Tugasnya? (Kelompok/Individu/Praktikum) = ")
@@ -378,7 +379,7 @@ def main():
                 elif operator == 6:
                     os.system("cls")
                     tugasKu.temporaryList("noTugas")
-                    os.system("cls")
+                    print("\nData Diurutkan Secara Otomatis")
                     menuSearch()
                 else:
                     print("Anda Keluar Dari Program.")
@@ -387,4 +388,3 @@ def main():
                 os.system('cls')   
                 print("Masukkan Angka.")
 main()
-
