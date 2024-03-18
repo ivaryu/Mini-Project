@@ -367,7 +367,7 @@ def main():
                     tugasKu.lihatTugas()
                 elif operator == 3:
                     os.system('cls')
-                    tugasKu.lihatTugas()
+                    tugasKu.temporaryList("noTugas")
                     tugasKu.hapusTugas()
                 elif operator == 4:
                     tugasKu.lihatTugas()
