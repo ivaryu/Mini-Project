@@ -107,7 +107,8 @@ class ManajemenTugas(Tugas):
             return
 
         self.head = self.head.next
-            
+        self.updateNoTugas()
+
     def hapusTugasDiantara(self, posisi):
         if self.head == None:
             print("Belum ada tugas")
@@ -122,6 +123,8 @@ class ManajemenTugas(Tugas):
             
             count += 1
             nodeSekarang.next
+        self.updateNoTugas()
+
 
     def hapusTugasDariBelakang(self):
         if self.head == None:
@@ -136,6 +139,7 @@ class ManajemenTugas(Tugas):
         while nodeSekarang.next.next != None:
             nodeSekarang = nodeSekarang.next
         nodeSekarang.next = None
+        self.updateNoTugas()
 
     def hapusTugas(self):
         try:    
@@ -294,6 +298,14 @@ class ManajemenTugas(Tugas):
             nodeSekarang = nodeSekarang.next
         
         return count
+
+    def updateNoTugas(self):
+        nodeSekarang = self.head
+        count = 1
+        while nodeSekarang:
+            nodeSekarang.noTugas = count
+            count += 1
+            nodeSekarang = nodeSekarang.next
     
 tugasKu = ManajemenTugas()
 
