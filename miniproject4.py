@@ -390,7 +390,7 @@ def main():
                     tenggatWaktu = input("Tenggat Waktu Tugas (DD/MM/YYYY HH:MM) = ")
                     tenggatWaktu = datetime.datetime.strptime(tenggatWaktu, "%d/%m/%Y %H:%M")
                     jenisTugas = input("Apa Jenis Tugasnya? (Kelompok/Individu/Praktikum) = ").capitalize()
-                    status = "Belum Selesai"
+                    status = input("Perbarui Status Tugas = ").capitalize()
                     print("="*30)
                     tugasKu.perbaruiTugas(noTugas, mataKuliah, materi, tenggatWaktu, jenisTugas, status)
                 elif operator == 5:
